@@ -57,6 +57,7 @@ li {
 
 li:not(:last-child)::after {
   content: '|';
+  color: #515154;
   display: 'inline';
   padding: 0 5px;
 }
