@@ -1,5 +1,5 @@
+import { throwOnError } from './helpers';
 import { API_BASE_URL } from '../constants';
-
 import { Game } from '../types';
 
 type CreateGameParams = {
@@ -20,7 +20,7 @@ export const createGame = ({ userId, turnsAmount }: CreateGameParams): Promise<G
       turnsAmount,
     }),
   },
-).then((res) => res.json());
+).then((res) => res.json()).then(throwOnError);
 
 type SubmitGameParams = {
   gameId: string;
@@ -41,4 +41,4 @@ export const submitGameTurn = ({ gameId, userId, value }: SubmitGameParams): Pro
       value,
     }),
   },
-).then((res) => res.json());
+).then((res) => res.json()).then(throwOnError);

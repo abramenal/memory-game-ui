@@ -43,16 +43,16 @@
       <Button text="Restart" v-on:click="restart" />
     </div>
   </div>
+
+  <Error v-if="error" :message="error" />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 
+import { Button, Card, Error } from '../components';
+
 import { createGame, submitGameTurn } from '../api';
-
-import Button from '../components/Button.vue';
-import Card from '../components/Card.vue';
-
 import { Game } from '../types';
 
 type Data = {
@@ -65,6 +65,7 @@ type Data = {
     value: number;
     isVisible: boolean;
   }[];
+  error?: string;
 };
 
 export default defineComponent({
@@ -72,6 +73,7 @@ export default defineComponent({
   components: {
     Button,
     Card,
+    Error,
   },
   props: {
     userId: {
@@ -87,14 +89,20 @@ export default defineComponent({
       game: null,
       isGuessMode: false,
       cards: [],
+      error: '',
     };
   },
   methods: {
     async start() {
       const { turnsAmount } = this.settings;
-      const game = await createGame({ userId: this.userId, turnsAmount });
-      this.game = game;
-      this.cards = game.sequence.map((value) => ({ value, isVisible: true, type: 'default' }));
+
+      try {
+        const game = await createGame({ userId: this.userId, turnsAmount });
+        this.game = game;
+        this.cards = game.sequence.map((value) => ({ value, isVisible: true, type: 'default' }));
+      } catch (e) {
+        this.error = e.message;
+      }
     },
     async restart() {
       this.settings = {
@@ -116,28 +124,32 @@ export default defineComponent({
       const { id, userId } = this.game;
       const { value } = this.cards[cardIndex];
 
-      this.game = await submitGameTurn({ gameId: id, userId, value });
-      const isFailed = this.game.status === 'failed';
+      try {
+        this.game = await submitGameTurn({ gameId: id, userId, value });
+        const isFailed = this.game.status === 'failed';
 
-      this.isGuessMode = this.game.status === 'started';
-      this.cards = this.cards.map((card, index) => {
-        if (cardIndex === index) {
-          return {
-            ...card,
-            isVisible: true,
-            type: isFailed ? 'error' : 'success',
-          };
-        }
+        this.isGuessMode = this.game.status === 'started';
+        this.cards = this.cards.map((card, index) => {
+          if (cardIndex === index) {
+            return {
+              ...card,
+              isVisible: true,
+              type: isFailed ? 'error' : 'success',
+            };
+          }
 
-        if (isFailed) {
-          return {
-            ...card,
-            isVisible: true,
-          };
-        }
+          if (isFailed) {
+            return {
+              ...card,
+              isVisible: true,
+            };
+          }
 
-        return card;
-      });
+          return card;
+        });
+      } catch (e) {
+        this.error = e.message;
+      }
     },
   },
 });

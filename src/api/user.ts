@@ -1,3 +1,4 @@
+import { throwOnError } from './helpers';
 import { API_BASE_URL } from '../constants';
 import { GameTurn, User } from '../types';
 
@@ -17,7 +18,7 @@ export const login = ({ username }: LoginParams): Promise<User> => fetch(
       username,
     }),
   },
-).then((res) => res.json());
+).then((res) => res.json()).then(throwOnError);
 
 type GetHistoryParams = {
   userId: string;
@@ -29,4 +30,4 @@ export const getUserHistory = ({ userId }: GetHistoryParams): Promise<GameTurn[]
     method: 'GET',
     mode: 'cors',
   },
-).then((res) => res.json());
+).then((res) => res.json()).then(throwOnError);

@@ -6,24 +6,28 @@
     <div class="banner-action">
       <Button text="Let me in" @click="login" :disabled="!username" />
     </div>
+    <Error v-if="error" :message="error" />
   </div>
 </template>
 
 <script>
-import Banner from '../components/Banner.vue';
-import Button from '../components/Button.vue';
+import { defineComponent } from 'vue';
+
+import { Banner, Button, Error } from '../components';
 
 import { login } from '../api';
 
-export default {
+export default defineComponent({
   name: 'Login',
   components: {
     Banner,
     Button,
+    Error,
   },
   data() {
     return {
       username: '',
+      error: '',
     };
   },
   methods: {
@@ -31,13 +35,23 @@ export default {
       if (!this.username) {
         return;
       }
-      const res = await login({ username: this.username });
-      if (!res.error && res.id) {
-        this.$emit('onLoginSuccess', true, res.id);
+
+      try {
+        const res = await login({ username: this.username });
+
+        if (res.error) {
+          throw res.error;
+        }
+
+        if (res.id) {
+          this.$emit('onLoginSuccess', true, res.id);
+        }
+      } catch (e) {
+        this.error = e.message;
       }
     },
   },
-};
+});
 </script>
 
 <style>
