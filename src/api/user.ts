@@ -9,6 +9,7 @@ export const login = ({ username }: LoginParams): Promise<User> => fetch(
   `${API_BASE_URL}/users/login`,
   {
     method: 'POST',
+    mode: 'cors',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -26,5 +27,6 @@ export const getUserHistory = ({ userId }: GetHistoryParams): Promise<GameTurn[]
   `${API_BASE_URL}/users/${userId}/history`,
   {
     method: 'GET',
+    mode: 'cors',
   },
 ).then((res) => res.json());

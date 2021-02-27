@@ -1,6 +1,6 @@
 export type GameTurn = {
   id: string;
-  value: string;
+  value: number;
   userId: string;
   gameId: string;
   createdAt: number;

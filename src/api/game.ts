@@ -11,6 +11,10 @@ export const createGame = ({ userId, turnsAmount }: CreateGameParams): Promise<G
   `${API_BASE_URL}/games`,
   {
     method: 'POST',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+    },
     body: JSON.stringify({
       userId,
       turnsAmount,
@@ -21,13 +25,17 @@ export const createGame = ({ userId, turnsAmount }: CreateGameParams): Promise<G
 type SubmitGameParams = {
   gameId: string;
   userId: string;
-  value: string;
+  value: number;
 };
 
 export const submitGameTurn = ({ gameId, userId, value }: SubmitGameParams): Promise<Game> => fetch(
   `${API_BASE_URL}/games/${gameId}/turn`,
   {
     method: 'POST',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+    },
     body: JSON.stringify({
       userId,
       value,
