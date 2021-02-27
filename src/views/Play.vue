@@ -1,0 +1,176 @@
+<template>
+  <div v-if="!game">
+  <h2>Start a new game</h2>
+    <div class="settings">
+      <v-select
+        placeholder="Amount of cards"
+        v-model="settings.turnsAmount"
+        :options="[4, 8, 12]"
+        close-on-select
+      />
+    </div>
+
+    <Button text="Let's play" v-on:click="start" :disabled="!settings.turnsAmount" />
+  </div>
+
+  <div v-if="!!game" class="game">
+    <h2 class="title">Memorize the numbers on cards.</h2>
+    <p>
+      Once you turn them, click them one by one starting from the lowest number
+    </p>
+
+    <div class="cards">
+      <Card
+        v-for="(card, index) in cards"
+        :key="card.value"
+        :value="card.value"
+        :isVisible="card.isVisible"
+        :isClickable="isGuessMode && card.type !== 'error'"
+        :type="card.type"
+        v-on:click="() => flipCard(index)"
+      />
+    </div>
+
+    <div v-if="!isGuessMode && game.status === 'started'">
+      <Button text="Flip the cards" v-on:click="flipAll" />
+    </div>
+
+    <p v-if="isGuessMode && game.status === 'started'">Now choose them carefully!</p>
+    <p v-if="!isGuessMode && game.status === 'failed'">Better luck next time</p>
+    <p v-if="!isGuessMode && game.status === 'completed'">Success!</p>
+
+    <div v-if="!isGuessMode && game.status !== 'started'">
+      <Button text="Restart" v-on:click="restart" />
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import { defineComponent } from 'vue';
+
+import { createGame, submitGameTurn } from '../api';
+
+import Button from '../components/Button.vue';
+import Card from '../components/Card.vue';
+
+import { Game } from '../types';
+
+type Data = {
+  settings: {
+    turnsAmount: number;
+  };
+  game: Game | null;
+  isGuessMode: boolean;
+  cards: {
+    value: number;
+    isVisible: boolean;
+  }[];
+};
+
+export default defineComponent({
+  name: 'Play',
+  components: {
+    Button,
+    Card,
+  },
+  props: {
+    userId: {
+      type: String,
+      required: true,
+    },
+  },
+  data(): Data {
+    return {
+      settings: {
+        turnsAmount: 0,
+      },
+      game: null,
+      isGuessMode: false,
+      cards: [],
+    };
+  },
+  methods: {
+    async start() {
+      const { turnsAmount } = this.settings;
+      const game = await createGame({ userId: this.userId, turnsAmount });
+      this.game = game;
+      this.cards = game.sequence.map((value) => ({ value, isVisible: true, type: 'default' }));
+    },
+    async restart() {
+      this.settings = {
+        turnsAmount: 0,
+      };
+      this.game = null;
+      this.cards = [];
+      this.isGuessMode = false;
+    },
+    flipAll() {
+      this.cards = this.cards.map((card) => ({ ...card, isVisible: false }));
+      this.isGuessMode = true;
+    },
+    async flipCard(cardIndex: number) {
+      if (!this.isGuessMode || !this.game || this.game.status !== 'started') {
+        return;
+      }
+
+      const { id, userId } = this.game;
+      const { value } = this.cards[cardIndex];
+
+      this.game = await submitGameTurn({ gameId: id, userId, value });
+      const isFailed = this.game.status === 'failed';
+
+      this.isGuessMode = this.game.status === 'started';
+      this.cards = this.cards.map((card, index) => {
+        if (cardIndex === index) {
+          return {
+            ...card,
+            isVisible: true,
+            type: isFailed ? 'error' : 'success',
+          };
+        }
+
+        if (isFailed) {
+          return {
+            ...card,
+            isVisible: true,
+          };
+        }
+
+        return card;
+      });
+    },
+  },
+});
+</script>
+
+<style>
+.settings {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.title {
+  margin-bottom: 0;
+}
+
+.hint {
+  margin-top: 4px;
+}
+
+.game {
+  display: flex;
+  flex-direction: column;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  max-width: 448px;
+
+  padding: 15px 0;
+
+  align-self: center;
+}
+</style>
