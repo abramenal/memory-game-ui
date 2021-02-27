@@ -1,5 +1,5 @@
 <template>
-  <button class="button" :disabled="disabled">{{text}}</button>
+  <button class="button" :disabled="disabled">{{ text }}</button>
 </template>
 
 <script lang="ts">
@@ -40,6 +40,6 @@ export default defineComponent({
 }
 
 .button:focus {
-  outline:0;
+  outline: 0;
 }
 </style>

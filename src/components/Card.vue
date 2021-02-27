@@ -1,9 +1,6 @@
 <template>
-  <div
-    class="card"
-    v-bind:class="{ 'error': isFailed, 'clickable': isClickable, [type]: true }"
-  >
-    <p class="label" v-show="isVisible">{{value}}</p>
+  <div class="card" v-bind:class="{ error: isFailed, clickable: isClickable, [type]: true }">
+    <p class="label" v-show="isVisible">{{ value }}</p>
   </div>
 </template>
 
@@ -49,9 +46,7 @@ export default defineComponent({
 
   /* background-color: #f5e9dd; */
 
-  transition: background-color 0.05s ease,
-              color 0.05s ease,
-              border 0.05s ease;
+  transition: background-color 0.05s ease, color 0.05s ease, border 0.05s ease;
 
   user-select: none;
 }
@@ -79,5 +74,4 @@ export default defineComponent({
   border: 1px solid #428c4d;
   color: #428c4d;
 }
-
 </style>

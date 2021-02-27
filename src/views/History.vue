@@ -1,6 +1,6 @@
 <template>
   <div class="record" v-for="game in history" :key="game.id">
-    <p class="title">Game length: {{game.turnsTotal}} | Status: {{game.status}}</p>
+    <p class="title">Game length: {{ game.turnsTotal }} | Status: {{ game.status }}</p>
     <div class="cards">
       <Card
         v-for="(turn, index) in game.turns"
@@ -27,7 +27,7 @@ import { GameHistory } from '../types';
 type Data = {
   error: string;
   history: GameHistory[];
-}
+};
 
 export default defineComponent({
   name: 'History',

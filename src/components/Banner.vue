@@ -15,14 +15,14 @@ export default defineComponent({
 </script>
 
 <style scoped>
-  h1 {
-    font-size: 4.5rem;
-    margin: 1rem;
-  }
+h1 {
+  font-size: 4.5rem;
+  margin: 1rem;
+}
 
-  span {
-    font-size: 5rem;
-    font-weight: bold;
-    text-transform: uppercase;
-  }
+span {
+  font-size: 5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
 </style>

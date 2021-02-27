@@ -4,11 +4,10 @@ import { GameHistory, User } from '../types';
 
 type LoginParams = {
   username: string;
-}
+};
 
-export const login = ({ username }: LoginParams): Promise<User> => fetch(
-  `${API_BASE_URL}/users/login`,
-  {
+export const login = ({ username }: LoginParams): Promise<User> =>
+  fetch(`${API_BASE_URL}/users/login`, {
     method: 'POST',
     mode: 'cors',
     headers: {
@@ -17,17 +16,18 @@ export const login = ({ username }: LoginParams): Promise<User> => fetch(
     body: JSON.stringify({
       username,
     }),
-  },
-).then((res) => res.json()).then(throwOnError);
+  })
+    .then(res => res.json())
+    .then(throwOnError);
 
 type GetHistoryParams = {
   userId: string;
-}
+};
 
-export const getUserHistory = ({ userId }: GetHistoryParams): Promise<GameHistory[]> => fetch(
-  `${API_BASE_URL}/users/${userId}/history`,
-  {
+export const getUserHistory = ({ userId }: GetHistoryParams): Promise<GameHistory[]> =>
+  fetch(`${API_BASE_URL}/users/${userId}/history`, {
     method: 'GET',
     mode: 'cors',
-  },
-).then((res) => res.json()).then(throwOnError);
+  })
+    .then(res => res.json())
+    .then(throwOnError);

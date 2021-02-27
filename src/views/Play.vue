@@ -1,13 +1,8 @@
 <template>
   <div v-if="!game">
-  <h2>Start a new game</h2>
+    <h2>Start a new game</h2>
     <div class="settings">
-      <v-select
-        placeholder="Amount of cards"
-        v-model="settings.turnsAmount"
-        :options="[4, 8, 12]"
-        close-on-select
-      />
+      <v-select placeholder="Amount of cards" v-model="settings.turnsAmount" :options="[4, 8, 12]" close-on-select />
     </div>
 
     <Button text="Let's play" v-on:click="start" :disabled="!settings.turnsAmount" />
@@ -15,9 +10,7 @@
 
   <div v-if="!!game" class="game">
     <h2 class="title">Memorize the numbers on cards.</h2>
-    <p>
-      Once you turn them, click them one by one starting from the lowest number
-    </p>
+    <p>Once you turn them, click them one by one starting from the lowest number</p>
 
     <div class="cards">
       <Card
@@ -99,7 +92,7 @@ export default defineComponent({
       try {
         const game = await createGame({ userId: this.userId, turnsAmount });
         this.game = game;
-        this.cards = game.sequence.map((value) => ({ value, isVisible: true, type: 'default' }));
+        this.cards = game.sequence.map(value => ({ value, isVisible: true, type: 'default' }));
       } catch (e) {
         this.error = e.message;
       }
@@ -113,7 +106,7 @@ export default defineComponent({
       this.isGuessMode = false;
     },
     flipAll() {
-      this.cards = this.cards.map((card) => ({ ...card, isVisible: false }));
+      this.cards = this.cards.map(card => ({ ...card, isVisible: false }));
       this.isGuessMode = true;
     },
     async flipCard(cardIndex: number) {

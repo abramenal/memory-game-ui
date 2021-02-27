@@ -1,15 +1,9 @@
 <template>
-  <p>
-    <ul>
-      <li
-        v-for="tab in tabs"
-        :key="tab.key"
-        v-on:click="() => handleLinkClick(tab.key)"
-      >
-        <span class="link" v-bind:class="{ 'active': active === tab.key }">{{tab.title}}</span>
-      </li>
-    </ul>
-  </p>
+  <ul>
+    <li v-for="tab in tabs" :key="tab.key" v-on:click="() => handleLinkClick(tab.key)">
+      <span class="link" v-bind:class="{ active: active === tab.key }">{{ tab.title }}</span>
+    </li>
+  </ul>
 </template>
 
 <script lang="ts">

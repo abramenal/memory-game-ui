@@ -1,7 +1,7 @@
 <template>
   <Login v-if="!isLoggedIn" v-on:on-login-success="login" />
   <div v-if="isLoggedIn">
-    <Header :active="activeTab" v-on:on-link-click="changeTab"/>
+    <Header :active="activeTab" v-on:on-link-click="changeTab" />
 
     <div v-if="activeTab === 'game'">
       <Play :userId="userId" />

@@ -7,9 +7,8 @@ type CreateGameParams = {
   turnsAmount: number;
 };
 
-export const createGame = ({ userId, turnsAmount }: CreateGameParams): Promise<Game> => fetch(
-  `${API_BASE_URL}/games`,
-  {
+export const createGame = ({ userId, turnsAmount }: CreateGameParams): Promise<Game> =>
+  fetch(`${API_BASE_URL}/games`, {
     method: 'POST',
     mode: 'cors',
     headers: {
@@ -19,8 +18,9 @@ export const createGame = ({ userId, turnsAmount }: CreateGameParams): Promise<G
       userId,
       turnsAmount,
     }),
-  },
-).then((res) => res.json()).then(throwOnError);
+  })
+    .then(res => res.json())
+    .then(throwOnError);
 
 type SubmitGameParams = {
   gameId: string;
@@ -28,9 +28,8 @@ type SubmitGameParams = {
   value: number;
 };
 
-export const submitGameTurn = ({ gameId, userId, value }: SubmitGameParams): Promise<Game> => fetch(
-  `${API_BASE_URL}/games/${gameId}/turn`,
-  {
+export const submitGameTurn = ({ gameId, userId, value }: SubmitGameParams): Promise<Game> =>
+  fetch(`${API_BASE_URL}/games/${gameId}/turn`, {
     method: 'POST',
     mode: 'cors',
     headers: {
@@ -40,5 +39,6 @@ export const submitGameTurn = ({ gameId, userId, value }: SubmitGameParams): Pro
       userId,
       value,
     }),
-  },
-).then((res) => res.json()).then(throwOnError);
+  })
+    .then(res => res.json())
+    .then(throwOnError);
