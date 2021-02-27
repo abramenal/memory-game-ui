@@ -1,4 +1,4 @@
-import { throwOnError } from './helpers';
+import throwOnError from './helpers/throwOnError';
 import { API_BASE_URL } from '../constants';
 import { Game } from '../types';
 
