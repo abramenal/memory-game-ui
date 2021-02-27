@@ -1,6 +1,5 @@
-export type User = {
-  id: string;
+import { Entity } from './Entity';
+
+export type User = Entity & {
   username: string;
-  createdAt: number;
-  updatedAt: number;
-}
+};

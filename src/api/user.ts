@@ -1,6 +1,6 @@
 import { throwOnError } from './helpers';
 import { API_BASE_URL } from '../constants';
-import { GameTurn, User } from '../types';
+import { GameHistory, User } from '../types';
 
 type LoginParams = {
   username: string;
@@ -24,7 +24,7 @@ type GetHistoryParams = {
   userId: string;
 }
 
-export const getUserHistory = ({ userId }: GetHistoryParams): Promise<GameTurn[]> => fetch(
+export const getUserHistory = ({ userId }: GetHistoryParams): Promise<GameHistory[]> => fetch(
   `${API_BASE_URL}/users/${userId}/history`,
   {
     method: 'GET',
