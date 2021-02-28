@@ -1,33 +1,32 @@
 # memory-game-ui
 
-## Project setup
+## Documentation
 
-```
+For more documentation around selected toolset, approach, testing, etc. see [docs](https://github.com/abramenal/memory-game-api/tree/main/docs) folder.
+
+## Prerequisites
+
+Running the application for development requires the following set of tools:
+
+- `Node.js>=14.15`
+- `npm`
+
+## Quick start
+
+```bash
 npm install
-```
-
-### Compiles and hot-reloads for development
-
-```
 npm run serve
 ```
 
-### Compiles and minifies for production
+The application should now be available at [http://localhost:8080](http://localhost:8080).
 
-```
-npm run build
-```
+## Testing the application
 
-### Run your unit tests
+```bash
+npm run test:coverage
 
-```
-npm run test:unit
-```
-
-### Lints and fixes files
-
-```
-npm run lint
+## or, w/o coverage
+npm test
 ```
 
 ### Customize configuration
