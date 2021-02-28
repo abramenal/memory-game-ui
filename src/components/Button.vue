@@ -1,5 +1,5 @@
 <template>
-  <button class="button" :disabled="disabled">{{ text }}</button>
+  <button data-testid="Button" class="button" :disabled="disabled">{{ text }}</button>
 </template>
 
 <script lang="ts">

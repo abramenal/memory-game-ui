@@ -1,6 +1,6 @@
 <template>
   <div class="card" v-bind:class="{ error: isFailed, clickable: isClickable, [type]: true }">
-    <p class="label" v-show="isVisible">{{ value }}</p>
+    <p data-testid="Card label" class="label" v-show="isVisible">{{ value }}</p>
   </div>
 </template>
 
@@ -16,7 +16,7 @@ enum CardType {
 export default defineComponent({
   name: 'Card',
   props: {
-    value: String,
+    value: Number,
     isVisible: Boolean,
     type: {
       type: String,

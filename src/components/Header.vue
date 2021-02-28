@@ -1,6 +1,6 @@
 <template>
   <ul>
-    <li v-for="tab in tabs" :key="tab.key" v-on:click="() => handleLinkClick(tab.key)">
+    <li v-for="tab in tabs" :key="tab.key" v-on:click="() => handleLinkClick(tab.key)" data-testid="{{tab.key}}">
       <span class="link" v-bind:class="{ active: active === tab.key }">{{ tab.title }}</span>
     </li>
   </ul>
@@ -14,6 +14,7 @@ export default defineComponent({
   props: {
     active: String,
   },
+  emits: ['onLinkClick'],
   data() {
     return {
       tabs: [

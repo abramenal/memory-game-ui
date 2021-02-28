@@ -1,5 +1,5 @@
 <template>
-  <h1>
+  <h1 data-testid="Banner">
     Wanna flip some
     <br />
     <span>cards?</span>
