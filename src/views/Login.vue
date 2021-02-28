@@ -24,6 +24,7 @@ export default defineComponent({
     Button,
     Error,
   },
+  emits: ['onLoginSuccess'],
   data() {
     return {
       username: '',

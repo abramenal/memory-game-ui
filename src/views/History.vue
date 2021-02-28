@@ -1,7 +1,7 @@
 <template>
   <div class="record" v-for="game in history" :key="game.id">
-    <p class="title">Game length: {{ game.turnsTotal }} | Status: {{ game.status }}</p>
-    <div class="cards">
+    <p class="title" data-testid="Game title">Game length: {{ game.turnsTotal }} | Status: {{ game.status }}</p>
+    <div class="cards" data-testid="Game cards">
       <Card
         v-for="(turn, index) in game.turns"
         :key="turn.value"

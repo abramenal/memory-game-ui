@@ -3,12 +3,12 @@
     <li>
       <img class="img" src="../assets/github.svg" width="25" alt="github logo" />
       Made by
-      <a class="link" href="https://github.com/abramenal" target="_blank">@abramenal</a>
+      <a data-testid="Github link" class="link" href="https://github.com/abramenal" target="_blank">@abramenal</a>
     </li>
     <li>
       <img class="img" src="../assets/vue.svg" width="25" alt="vue.js framework logo" />
       Powered by
-      <a class="link" href="https://vuejs.org" target="_blank">Vue.js</a>
+      <a data-testid="Vue link" class="link" href="https://vuejs.org" target="_blank">Vue.js</a>
     </li>
   </ul>
 </template>
