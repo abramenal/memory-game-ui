@@ -1,0 +1,20 @@
+[
+  {
+    "id": "ec55ee90-871d-4f5d-b4c3-8966ef027ae8",
+    "userId": "c4c8d7ad-fd04-4a9b-8aae-27033abd6f74",
+    "status": "failed",
+    "sequence": [3, 8, 9, 17],
+    "currentTurn": 0,
+    "turnsTotal": 4,
+    "createdAt": "2021-02-28T00:23:43.764Z",
+    "turns": [
+      {
+        "id": "592f87ab-0207-482d-aa11-c8c83db6f196",
+        "value": 46,
+        "userId": "c4c8d7ad-fd04-4a9b-8aae-27033abd6f74",
+        "gameId": "ec55ee90-871d-4f5d-b4c3-8966ef027ae8",
+        "createdAt": "2021-02-28T00:23:49.634Z"
+      }
+    ]
+  }
+]

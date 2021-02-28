@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getUserHistory calls HTTP API 1`] = `
+Array [
+  "http://localhost:3000/users/test/history",
+  Object {
+    "method": "GET",
+    "mode": "cors",
+  },
+]
+`;
+
+exports[`login calls HTTP API 1`] = `
+Array [
+  "http://localhost:3000/users/login",
+  Object {
+    "body": "{\\"username\\":\\"test\\"}",
+    "headers": Object {
+      "Content-Type": "application/json",
+    },
+    "method": "POST",
+    "mode": "cors",
+  },
+]
+`;

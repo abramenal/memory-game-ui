@@ -4,15 +4,16 @@ module.exports = {
     '^.+\\.vue$': 'vue-jest',
   },
   clearMocks: true,
-  collectCoverageFrom: ['src/**/**.ts', '!src/types/**.ts', '!src/local.ts', '!**/node_modules/**'],
+  collectCoverageFrom: ['src/**/**.ts', 'src/**/**.vue', '!src/types/**.ts', '!src/local.ts', '!**/node_modules/**'],
   coverageDirectory: 'coverage',
   coverageThreshold: {
     global: {
-      branches: 5,
-      functions: 5,
-      lines: 5,
-      statements: 5,
+      branches: 15,
+      functions: 50,
+      lines: 40,
+      statements: 40,
     },
   },
   testMatch: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[tj]s?(x)'],
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
 };

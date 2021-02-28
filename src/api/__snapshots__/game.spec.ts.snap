@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createGame calls HTTP API 1`] = `
+Array [
+  "http://localhost:3000/games",
+  Object {
+    "body": "{\\"userId\\":\\"test\\",\\"turnsAmount\\":4}",
+    "headers": Object {
+      "Content-Type": "application/json",
+    },
+    "method": "POST",
+    "mode": "cors",
+  },
+]
+`;
+
+exports[`submitGameTurn calls HTTP API 1`] = `
+Array [
+  "http://localhost:3000/games/test2/turn",
+  Object {
+    "body": "{\\"userId\\":\\"test\\",\\"value\\":4}",
+    "headers": Object {
+      "Content-Type": "application/json",
+    },
+    "method": "POST",
+    "mode": "cors",
+  },
+]
+`;

@@ -11,11 +11,12 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
-    "vue": "^3.0.0",
+    "vue": "^3.0.6",
     "vue-next-select": "^1.0.0"
   },
   "devDependencies": {
-    "@testing-library/vue": "^5.6.1",
+    "@testing-library/jest-dom": "^5.11.9",
+    "@testing-library/vue": "^6.4.0",
     "@types/jest": "^24.0.19",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.33.0",
@@ -24,7 +25,7 @@
     "@vue/cli-plugin-typescript": "~4.5.0",
     "@vue/cli-plugin-unit-jest": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
-    "@vue/compiler-sfc": "^3.0.0",
+    "@vue/compiler-sfc": "^3.0.6",
     "@vue/eslint-config-airbnb": "^5.0.2",
     "@vue/eslint-config-typescript": "^5.0.2",
     "eslint": "^6.7.2",
